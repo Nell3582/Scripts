@@ -24,9 +24,6 @@ jobs:
           sudo npm install serverless -g
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
-          if [ $JD_COOKIE ]; then sed -i "/variables/a\      JD_COOKIE: $JD_COOKIE" serverless.yml; fi;
-          if [ $JD_DEBUG ]; then sed -i "/variables/a\      JD_DEBUG: $JD_DEBUG" serverless.yml; fi;
-          if [ $JD_USER_AGENT ]; then sed -i "/variables/a\      JD_USER_AGENT: $JD_USER_AGENT" serverless.yml; fi;
           if [ $PUSH_KEY ]; then sed -i "/variables/a\      PUSH_KEY: $PUSH_KEY" serverless.yml; fi;
           if [ $BARK_PUSH ]; then sed -i "/variables/a\      BARK_PUSH: $BARK_PUSH" serverless.yml; fi;
           if [ $BARK_SOUND ]; then sed -i "/variables/a\      BARK_SOUND: $BARK_SOUND" serverless.yml; fi;
@@ -51,9 +48,6 @@ jobs:
           cat serverless.yml
           env
         env: #因为直接读取secrets里面的值很多字符不会自动转译，导致写入serverless.yml异常，所以设置到环境变量，在读取环境变量转译过的值
-          JD_COOKIE: ${{ secrets.JD_COOKIE}}
-          JD_DEBUG: ${{ secrets.JD_DEBUG}}
-          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT}}
           PUSH_KEY: ${{ secrets.PUSH_KEY}}
           BARK_PUSH: ${{ secrets.BARK_PUSH}}
           BARK_SOUND: ${{ secrets.BARK_SOUND}}
@@ -69,44 +63,13 @@ jobs:
           PUSH_PLUS_USER: ${{ secrets.PUSH_PLUS_USER}}
           TG_PROXY_HOST: ${{ secrets.TG_PROXY_HOST}}
           TG_PROXY_PORT: ${{ secrets.TG_PROXY_PORT}}
-          FRUITSHARECODES: ${{ secrets.FRUITSHARECODES}}
-          PETSHARECODES: ${{ secrets.PETSHARECODES}}
-          PLANT_BEAN_SHARECODES: ${{ secrets.PLANT_BEAN_SHARECODES}}
-          SUPERMARKET_SHARECODES: ${{ secrets.SUPERMARKET_SHARECODES}}
-          DDFACTORY_SHARECODES: ${{ secrets.DDFACTORY_SHARECODES}}
-          DREAM_FACTORY_SHARE_CODES: ${{ secrets.DREAM_FACTORY_SHARE_CODES}}
-          JDZZ_SHARECODES: ${{ secrets.JDZZ_SHARECODES}}
-          JDJOY_SHARECODES: ${{ secrets.JDJOY_SHARECODES}}
-          BOOKSHOP_SHARECODES: ${{ secrets.BOOKSHOP_SHARECODES}}
-          JD_CASH_SHARECODES: ${{ secrets.JD_CASH_SHARECODES}}
-          JXNC_SHARECODES: ${{ secrets.JXNC_SHARECODES}}
-          JD_BEAN_STOP: ${{ secrets.JD_BEAN_STOP}}
-          JD_BEAN_SIGN_STOP_NOTIFY: ${{ secrets.JD_BEAN_SIGN_STOP_NOTIFY}}
-          JD_BEAN_SIGN_NOTIFY_SIMPLE: ${{ secrets.JD_BEAN_SIGN_NOTIFY_SIMPLE}}
-          PET_NOTIFY_CONTROL: ${{ secrets.PET_NOTIFY_CONTROL}}
-          FRUIT_NOTIFY_CONTROL: ${{ secrets.FRUIT_NOTIFY_CONTROL}}
-          JD_JOY_REWARD_NOTIFY: ${{ secrets.JD_JOY_REWARD_NOTIFY}}
-          JD_818_SHAREID_NOTIFY: ${{ secrets.JD_818_SHAREID_NOTIFY}}
-          JOY_FEED_COUNT: ${{ secrets.JOY_FEED_COUNT}}
-          JOY_HELP_FEED: ${{ secrets.JOY_HELP_FEED}}
-          JOY_RUN_FLAG: ${{ secrets.JOY_RUN_FLAG}}
-          JOY_TEAM_LEVEL: ${{ secrets.JOY_TEAM_LEVEL}}
-          JD_JOY_REWARD_NAME: ${{ secrets.JD_JOY_REWARD_NAME}}
-          MARKET_COIN_TO_BEANS: ${{ secrets.MARKET_COIN_TO_BEANS}}
-          MARKET_REWARD_NOTIFY: ${{ secrets.MARKET_REWARD_NOTIFY}}
-          SUPERMARKET_UPGRADE: ${{ secrets.SUPERMARKET_UPGRADE}}
-          BUSINESS_CIRCLE_JUMP: ${{ secrets.BUSINESS_CIRCLE_JUMP}}
-          SUPERMARKET_LOTTERY: ${{ secrets.SUPERMARKET_LOTTERY}}
-          FRUIT_BEAN_CARD: ${{ secrets.FRUIT_BEAN_CARD}}
-          UN_SUBSCRIBES: ${{ secrets.UN_SUBSCRIBES}}
-          UN_BIND_CARD_NUM: ${{ secrets.UN_BIND_CARD_NUM}}
-          UN_BIND_STOP_CARD: ${{ secrets.UN_BIND_STOP_CARD}}
-          JDJOY_HELPSELF: ${{ secrets.JDJOY_HELPSELF}}
-          JDJOY_APPLYJDBEAN: ${{ secrets.JDJOY_APPLYJDBEAN}}
-          BUY_JOY_LEVEL: ${{ secrets.BUY_JOY_LEVEL}}
-          MONEY_TREE_SELL_FRUIT: ${{ secrets.MONEY_TREE_SELL_FRUIT}}
-          FACTORAY_WANTPRODUCT_NAME: ${{ secrets.FACTORAY_WANTPRODUCT_NAME}}
-          JXNCTOKENS: ${{ secrets.JXNCTOKENS}}
+          KUAISHOUMV: ${{ secrets.KUAISHOUMV}}
+          YOUTH_TIME: ${{ secrets.YOUTH_TIME}}
+          YOUTH_ARTBODY: ${{ secrets.YOUTH_ARTBODY}}
+          YOUTH_READBODY: ${{ secrets.YOUTH_READBODY}}
+          YOUTH_HEADER: ${{ secrets.YOUTH_HEADER}}
+          KS_TOKEN: ${{ secrets.KS_TOKEN}}
+          
 
       - name: "部署到腾讯云函数"
         run: serverless deploy
